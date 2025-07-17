@@ -9,6 +9,15 @@
         <td>@Model.ProductID</td>
     </tr>
     <tr>
+        <th>Ảnh sản phẩm</th>
+        <td>
+            @if (!string.IsNullOrEmpty(Model.ImagePro))
+            {
+                <img src="~/@Model.ImagePro" alt="Ảnh sản phẩm" style="max-width: 200px; max-height: 200px;" />
+            }
+        </td>
+    </tr>
+    <tr>
         <th>Tên</th>
         <td>@Model.NamePro</td>
     </tr>

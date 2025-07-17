@@ -3,7 +3,7 @@
     ViewData["Title"] = "Thêm sản phẩm";
 }
 <h2>Thêm sản phẩm</h2>
-<form asp-action="Create" method="post">
+<form asp-action="Create" method="post" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group mb-3">
         <label asp-for="NamePro" class="form-label"></label>
@@ -34,6 +34,10 @@
             placeholder="Mô tả sản phẩm (tối đa 500 ký tự)"></textarea>
         <span asp-validation-for="DecriptionPro" class="text-danger"></span>
     </div>
+    <div class="form-group mb-3">
+        <label for="ImageFile" class="form-label">Ảnh sản phẩm</label>
+        <input type="file" class="form-control" id="ImageFile" name="ImageFile" accept="image/*" />
+    </div>
     <button type="submit" class="btn btn-success me-2">Lưu</button>
     <a asp-action="Index" class="btn btn-secondary">Hủy</a>
 </form>
@@ -43,8 +47,7 @@
     }
 }
 
-           
-           
-           
-        
-    
+
+
+
+

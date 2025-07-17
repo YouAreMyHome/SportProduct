@@ -3,7 +3,7 @@
     ViewData["Title"] = "Chỉnh sửa sản phẩm";
 }
 <h2>Chỉnh sửa sản phẩm</h2>
-<form asp-action="Edit" method="post">
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="ProductID" />
     <div class="form-group mb-3">
@@ -34,6 +34,16 @@
         <textarea asp-for="DecriptionPro" class="form-control" rows="3"
             placeholder="Mô tả sản phẩm (tối đa 500 ký tự)"></textarea>
         <span asp-validation-for="DecriptionPro" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label for="ImageFile" class="form-label">Ảnh sản phẩm</label>
+        <input type="file" class="form-control" id="ImageFile" name="ImageFile" accept="image/*" />
+        @if (!string.IsNullOrEmpty(Model.ImagePro))
+        {
+            <div class="mt-2">
+                <img src="~/@Model.ImagePro" alt="Ảnh sản phẩm" style="max-width: 200px; max-height: 200px;" />
+            </div>
+        }
     </div>
     <button type="submit" class="btn btn-success me-2">Lưu</button>
     <a asp-action="Details" class="btn btn-secondary">Hủy</a>

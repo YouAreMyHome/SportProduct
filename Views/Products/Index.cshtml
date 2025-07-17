@@ -8,6 +8,7 @@
     <thead>
         <tr>
             <th>Mã</th>
+            <th>Ảnh</th>
             <th>Tên</th>
             <th>Danh mục</th>
             <th>Giá</th>
@@ -20,6 +21,12 @@
         {
             <tr>
                 <td>@item.ProductID</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.ImagePro))
+                    {
+                        <img src="~/@item.ImagePro" alt="Ảnh sản phẩm" style="max-width: 80px; max-height: 80px;" />
+                    }
+                </td>
                 <td>@item.NamePro</td>
                 <td>@item.Category</td>
                 <td>@(item.Price.HasValue ? string.Format("{0:N0}", item.Price) : "")</td>
@@ -37,4 +44,3 @@
     </tbody>
 </table>
 
-                       

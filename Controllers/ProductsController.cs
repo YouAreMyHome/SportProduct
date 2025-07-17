@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 using Microsoft.EntityFrameworkCore;
 using SportProductMVC.Models;
 using System.Linq;
@@ -30,7 +32,7 @@ namespace SportProductMVC.Controllers
         // POST: Products/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("NamePro,DecriptionPro,Category,Price,ImagePro,ManufacturingDate")] Product product)
+        public async Task<IActionResult> Create([Bind("NamePro,DecriptionPro,Category,Price,ImagePro,ManufacturingDate")] Product product, IFormFile? ImageFile)
         {
             if (!new[] { "Vợt", "Bóng", "Cầu", "Đệm", "Quần áo" }.Contains(product.Category))
                 ModelState.AddModelError("Category", "Category không hợp lệ.");
@@ -39,6 +41,17 @@ namespace SportProductMVC.Controllers
 
             if (ModelState.IsValid)
             {
+                if (ImageFile != null && ImageFile.Length > 0)
+                {
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
+                    var filePath = Path.Combine("wwwroot/images", fileName);
+                    Directory.CreateDirectory(Path.GetDirectoryName(filePath)!);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await ImageFile.CopyToAsync(stream);
+                    }
+                    product.ImagePro = "images/" + fileName;
+                }
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -71,7 +84,7 @@ namespace SportProductMVC.Controllers
         // POST: Products/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductID,NamePro,Category,ManufacturingDate,Price,DecriptionPro,ImagePro")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductID,NamePro,Category,ManufacturingDate,Price,DecriptionPro,ImagePro")] Product product, IFormFile? ImageFile)
         {
             if (!new[] { "Vợt", "Bóng", "Cầu", "Đệm", "Quần áo" }.Contains(product.Category))
                 ModelState.AddModelError("Category", "Category không hợp lệ.");
@@ -80,6 +93,17 @@ namespace SportProductMVC.Controllers
 
             if (ModelState.IsValid)
             {
+                if (ImageFile != null && ImageFile.Length > 0)
+                {
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
+                    var filePath = Path.Combine("wwwroot/images", fileName);
+                    Directory.CreateDirectory(Path.GetDirectoryName(filePath)!);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await ImageFile.CopyToAsync(stream);
+                    }
+                    product.ImagePro = "images/" + fileName;
+                }
                 _context.Update(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
