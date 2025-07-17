@@ -2,40 +2,36 @@
 @{
     ViewData["Title"] = "Chi tiết sản phẩm";
 }
-<h2>Chi tiết sản phẩm</h2>
-<table class="table table-bordered">
-    <tr>
-        <th>Mã sản phẩm</th>
-        <td>@Model.ProductID</td>
-    </tr>
-    <tr>
-        <th>Ảnh sản phẩm</th>
-        <td>
-            @if (!string.IsNullOrEmpty(Model.ImagePro))
-            {
-                <img src="~/@Model.ImagePro" alt="Ảnh sản phẩm" style="max-width: 200px; max-height: 200px;" />
-            }
-        </td>
-    </tr>
-    <tr>
-        <th>Tên</th>
-        <td>@Model.NamePro</td>
-    </tr>
-    <tr>
-        <th>Danh mục</th>
-        <td>@Model.Category</td>
-    </tr>
-    <tr>
-        <th>Ngày sản xuất</th>
-        <td>@Model.ManufacturingDate.ToString()</td>
-    </tr>
-    <tr>
-        <th>Giá</th>
-        <td>@(Model.Price.HasValue ? string.Format("{0:N0}", Model.Price) : "")</td>
-    </tr>
-    <tr>
-        <th>Mô tả</th>
-        <td>@Model.DecriptionPro</td>
-    </tr>
-</table>
-<a asp-action="Edit" asp-route-id="@Model.ProductID" class="btn btn-primary">Chỉnh sửa</a>
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-lg border-0 rounded-4 p-4">
+            <div class="card-body">
+                <h2 class="mb-4 text-primary fw-bold text-center">Chi tiết sản phẩm</h2>
+                <div class="row g-4 align-items-center">
+                    <div class="col-md-5 text-center">
+                        @if (!string.IsNullOrEmpty(Model.ImagePro))
+                        {
+                            <img src="~/@Model.ImagePro" alt="Ảnh sản phẩm" class="img-thumbnail shadow-sm border" style="max-width: 320px; max-height: 320px; object-fit:cover; border-radius:1rem;" />
+                        }
+                    </div>
+                    <div class="col-md-7">
+                        <ul class="list-group list-group-flush mb-3">
+                            <li class="list-group-item bg-transparent"><span class="fw-semibold text-secondary">Mã sản phẩm:</span> <span class="ms-2">@Model.ProductID</span></li>
+                            <li class="list-group-item bg-transparent"><span class="fw-semibold text-secondary">Tên:</span> <span class="ms-2">@Model.NamePro</span></li>
+                            <li class="list-group-item bg-transparent"><span class="fw-semibold text-secondary">Danh mục:</span> <span class="ms-2">@Model.Category</span></li>
+                            <li class="list-group-item bg-transparent"><span class="fw-semibold text-secondary">Ngày sản xuất:</span> <span class="ms-2">@Model.ManufacturingDate.ToString()</span></li>
+                            <li class="list-group-item bg-transparent"><span class="fw-semibold text-secondary">Giá:</span> <span class="ms-2 text-success">@(Model.Price.HasValue ? string.Format("{0:N0}", Model.Price) : "")</span></li>
+                        </ul>
+                        <div class="mb-3">
+                            <span class="fw-semibold text-secondary">Mô tả:</span>
+                            <div class="border rounded-3 p-2 bg-light mt-1" style="min-height:60px;">@Model.DecriptionPro</div>
+                        </div>
+                        <div class="d-flex justify-content-end mt-4">
+                            <a asp-action="Edit" asp-route-id="@Model.ProductID" class="btn btn-primary btn-lg px-5 shadow">Chỉnh sửa</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,22 +1,74 @@
 html {
-  font-size: 14px;
+  font-size: 15px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
 }
 
 @media (min-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 17px;
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+.btn, .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+  border-radius: 0.5rem;
+  transition: box-shadow 0.2s, background 0.2s;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.btn-success {
+  background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
+  border: none;
+}
+.btn-success:hover {
+  background: linear-gradient(90deg, #16a34a 0%, #22c55e 100%);
+}
+
+.btn-info {
+  background: linear-gradient(90deg, #0ea5e9 0%, #2563eb 100%);
+  border: none;
+}
+.btn-info:hover {
+  background: linear-gradient(90deg, #2563eb 0%, #0ea5e9 100%);
+}
+
+.btn-warning {
+  background: linear-gradient(90deg, #facc15 0%, #eab308 100%);
+  border: none;
+  color: #333;
+}
+.btn-warning:hover {
+  background: linear-gradient(90deg, #eab308 0%, #facc15 100%);
+  color: #222;
+}
+
+.btn-danger {
+  background: linear-gradient(90deg, #ef4444 0%, #b91c1c 100%);
+  border: none;
+}
+.btn-danger:hover {
+  background: linear-gradient(90deg, #b91c1c 0%, #ef4444 100%);
 }
 
 body {
   margin-bottom: 60px;
+}
+
+.table {
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #fff;
+}
+.table-hover tbody tr:hover {
+  background: #f1f5f9;
+  transition: background 0.2s;
+}
+.card {
+  border-radius: 1rem;
+}
+.navbar {
+  border-radius: 0 0 1rem 1rem;
+}
+.footer {
+  border-radius: 1rem 1rem 0 0;
 }

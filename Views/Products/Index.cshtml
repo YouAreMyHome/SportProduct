@@ -2,45 +2,46 @@
 @{
     ViewData["Title"] = "Danh sách sản phẩm";
 }
-<h2>Danh sách sản phẩm</h2>
-<a asp-action="Create" class="btn btn-success mb-3">Thêm sản phẩm</a>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Mã</th>
-            <th>Ảnh</th>
-            <th>Tên</th>
-            <th>Danh mục</th>
-            <th>Giá</th>
-            <th>Ngày sản xuất</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<h2 class="mb-4 text-primary fw-bold">Danh sách sản phẩm</h2>
+<a asp-action="Create" class="btn btn-success mb-3 shadow">Thêm sản phẩm</a>
+<div class="table-responsive">
+    <table class="table table-hover align-middle shadow rounded-4 overflow-hidden">
+        <thead class="table-primary">
             <tr>
-                <td>@item.ProductID</td>
-                <td>
-                    @if (!string.IsNullOrEmpty(item.ImagePro))
-                    {
-                        <img src="~/@item.ImagePro" alt="Ảnh sản phẩm" style="max-width: 80px; max-height: 80px;" />
-                    }
-                </td>
-                <td>@item.NamePro</td>
-                <td>@item.Category</td>
-                <td>@(item.Price.HasValue ? string.Format("{0:N0}", item.Price) : "")</td>
-                <td>@item.ManufacturingDate.ToString()</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.ProductID" class="btn btn-info btn-sm">Xem</a>
-                    <a asp-action="Edit" asp-route-id="@item.ProductID" class="btn btn-warning btn-sm">Sửa</a>
-                    <form asp-action="Delete" asp-route-id="@item.ProductID" method="post" style="display:inline"
-                        onsubmit="return confirm('Bạn có chắc muốn xóa sản phẩm này?');">
-                        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
-                    </form>
-                </td>
+                <th>Mã</th>
+                <th>Ảnh</th>
+                <th>Tên</th>
+                <th>Danh mục</th>
+                <th>Giá</th>
+                <th>Ngày sản xuất</th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
-
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="align-middle">
+                    <td>@item.ProductID</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.ImagePro))
+                        {
+                            <img src="~/@item.ImagePro" alt="Ảnh sản phẩm" class="rounded shadow-sm border" style="max-width: 80px; max-height: 80px; object-fit:cover; display:block; margin:auto;" />
+                        }
+                    </td>
+                    <td class="fw-semibold">@item.NamePro</td>
+                    <td>@item.Category</td>
+                    <td class="text-success">@(item.Price.HasValue ? string.Format("{0:N0}", item.Price) : "")</td>
+                    <td>@item.ManufacturingDate.ToString()</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.ProductID" class="btn btn-info btn-sm me-1">Xem</a>
+                        <a asp-action="Edit" asp-route-id="@item.ProductID" class="btn btn-warning btn-sm me-1">Sửa</a>
+                        <form asp-action="Delete" asp-route-id="@item.ProductID" method="post" style="display:inline"
+                            onsubmit="return confirm('Bạn có chắc muốn xóa sản phẩm này?');">
+                            <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

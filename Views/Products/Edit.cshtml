@@ -2,56 +2,61 @@
 @{
     ViewData["Title"] = "Chỉnh sửa sản phẩm";
 }
-<h2>Chỉnh sửa sản phẩm</h2>
-<form asp-action="Edit" method="post" enctype="multipart/form-data">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="ProductID" />
-    <div class="form-group mb-3">
-        <label asp-for="NamePro" class="form-label"></label>
-        <input asp-for="NamePro" class="form-control" placeholder="Nhập tên sản phẩm" autofocus />
-        <span asp-validation-for="NamePro" class="text-danger"></span>
-    </div>
-    <div class="form-group mb-3">
-        <label asp-for="Category" class="form-label">Danh mục</label>
-        @await Component.InvokeAsync("CategoryList", new { selectedCategory = Model.Category })
-        <span asp-validation-for="Category" class="text-danger"></span>
-    </div>
-    <div class="form-group mb-3">
-        <label asp-for="ManufacturingDate" class="form-label"></label>
-        <input asp-for="ManufacturingDate" class="form-control" type="date"
-            max="@DateTime.Now.ToString("yyyy-MM-dd")" />
-        <span asp-validation-for="ManufacturingDate" class="text-danger"></span>
-    </div>
-    <div class="form-group mb-3">
-        <label asp-for="Price" class="form-label"></label>
-        <input asp-for="Price" class="form-control" inputmode="decimal" pattern="[0-9.,]+"
-            placeholder="Nhập giá, ví dụ: 1.200.000,00" />
-        <span asp-validation-for="Price" class="text-danger"></span>
-        <small class="form-text text-muted">Nhập số dạng 1.200.000,00</small>
-    </div>
-    <div class="form-group mb-3">
-        <label asp-for="DecriptionPro" class="form-label"></label>
-        <textarea asp-for="DecriptionPro" class="form-control" rows="3"
-            placeholder="Mô tả sản phẩm (tối đa 500 ký tự)"></textarea>
-        <span asp-validation-for="DecriptionPro" class="text-danger"></span>
-    </div>
-    <div class="form-group mb-3">
-        <label for="ImageFile" class="form-label">Ảnh sản phẩm</label>
-        <input type="file" class="form-control" id="ImageFile" name="ImageFile" accept="image/*" />
-        @if (!string.IsNullOrEmpty(Model.ImagePro))
-        {
-            <div class="mt-2">
-                <img src="~/@Model.ImagePro" alt="Ảnh sản phẩm" style="max-width: 200px; max-height: 200px;" />
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-lg border-0 rounded-4 p-4">
+            <div class="card-body">
+                <h2 class="mb-4 text-primary fw-bold text-center">Chỉnh sửa sản phẩm</h2>
+                <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <input type="hidden" asp-for="ProductID" />
+                    <div class="mb-3">
+                        <label asp-for="NamePro" class="form-label fw-semibold text-dark"></label>
+                        <input asp-for="NamePro" class="form-control form-control-lg rounded-3" placeholder="Nhập tên sản phẩm" autofocus />
+                        <span asp-validation-for="NamePro" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Category" class="form-label fw-semibold text-dark">Danh mục</label>
+                        @await Component.InvokeAsync("CategoryList", new { selectedCategory = Model.Category })
+                        <span asp-validation-for="Category" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ManufacturingDate" class="form-label fw-semibold text-dark"></label>
+                        <input asp-for="ManufacturingDate" class="form-control form-control-lg rounded-3" type="date" max="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        <span asp-validation-for="ManufacturingDate" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Price" class="form-label fw-semibold text-dark"></label>
+                        <input asp-for="Price" class="form-control form-control-lg rounded-3" inputmode="decimal" pattern="[0-9.,]+" placeholder="Nhập giá, ví dụ: 1.200.000,00" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                        <small class="form-text text-muted">Nhập số dạng 1.200.000,00</small>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="DecriptionPro" class="form-label fw-semibold text-dark"></label>
+                        <textarea asp-for="DecriptionPro" class="form-control rounded-3" rows="3" placeholder="Mô tả sản phẩm (tối đa 500 ký tự)"></textarea>
+                        <span asp-validation-for="DecriptionPro" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="ImageFile" class="form-label fw-semibold text-dark">Ảnh sản phẩm</label>
+                        <input type="file" class="form-control form-control-lg rounded-3" id="ImageFile" name="ImageFile" accept="image/*" />
+                        @if (!string.IsNullOrEmpty(Model.ImagePro))
+                        {
+                            <div class="mt-3 text-center">
+                                <img src="~/@Model.ImagePro" alt="Ảnh sản phẩm" class="img-thumbnail shadow-sm border" style="max-width: 220px; max-height: 220px; object-fit:cover; border-radius:1rem;" />
+                            </div>
+                        }
+                    </div>
+                    <div class="d-flex justify-content-center mt-4">
+                        <button type="submit" class="btn btn-success btn-lg px-5 me-3 shadow">Lưu</button>
+                        <a asp-action="Details" class="btn btn-secondary btn-lg px-4">Hủy</a>
+                    </div>
+                </form>
             </div>
-        }
+        </div>
     </div>
-    <button type="submit" class="btn btn-success me-2">Lưu</button>
-    <a asp-action="Details" class="btn btn-secondary">Hủy</a>
-</form>
+</div>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
-
-
