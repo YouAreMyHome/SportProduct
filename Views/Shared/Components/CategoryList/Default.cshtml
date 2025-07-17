@@ -1,0 +1,17 @@
+@model List<string>
+@{
+    var selected = ViewBag.SelectedCategory as string;
+}
+<select name="Category" class="form-control">
+    @foreach (var cat in Model)
+    {
+        if (cat == selected)
+        {
+            <option value="@cat" selected>@cat</option>
+        }
+        else
+        {
+            <option value="@cat">@cat</option>
+        }
+    }
+</select>

@@ -1,0 +1,31 @@
+# Ignore build output and other unnecessary files
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.vs/
+# Ignore Rider project files
+.idea/
+# Ignore Visual Studio Code settings
+.vscode/
+# Ignore build results
+[Dd]ebug/
+[Rr]elease/
+# Ignore NuGet packages
+*.nupkg
+# Ignore logs
+*.log
+# Ignore local secrets
+secrets.json
+# Ignore publish output
+publish/
+# Ignore test results
+TestResults/
+# Ignore temporary files
+*.tmp
+*.temp
+# Ignore OS generated files
+.DS_Store
+Thumbs.db

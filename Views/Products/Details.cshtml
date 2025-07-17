@@ -1,0 +1,32 @@
+@model Product
+@{
+    ViewData["Title"] = "Chi tiết sản phẩm";
+}
+<h2>Chi tiết sản phẩm</h2>
+<table class="table table-bordered">
+    <tr>
+        <th>Mã sản phẩm</th>
+        <td>@Model.ProductID</td>
+    </tr>
+    <tr>
+        <th>Tên</th>
+        <td>@Model.NamePro</td>
+    </tr>
+    <tr>
+        <th>Danh mục</th>
+        <td>@Model.Category</td>
+    </tr>
+    <tr>
+        <th>Ngày sản xuất</th>
+        <td>@Model.ManufacturingDate.ToString()</td>
+    </tr>
+    <tr>
+        <th>Giá</th>
+        <td>@(Model.Price.HasValue ? string.Format("{0:N0}", Model.Price) : "")</td>
+    </tr>
+    <tr>
+        <th>Mô tả</th>
+        <td>@Model.DecriptionPro</td>
+    </tr>
+</table>
+<a asp-action="Edit" asp-route-id="@Model.ProductID" class="btn btn-primary">Chỉnh sửa</a>

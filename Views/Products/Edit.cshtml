@@ -1,0 +1,47 @@
+@model Product
+@{
+    ViewData["Title"] = "Chỉnh sửa sản phẩm";
+}
+<h2>Chỉnh sửa sản phẩm</h2>
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="ProductID" />
+    <div class="form-group mb-3">
+        <label asp-for="NamePro" class="form-label"></label>
+        <input asp-for="NamePro" class="form-control" placeholder="Nhập tên sản phẩm" autofocus />
+        <span asp-validation-for="NamePro" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Category" class="form-label">Danh mục</label>
+        @await Component.InvokeAsync("CategoryList", new { selectedCategory = Model.Category })
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="ManufacturingDate" class="form-label"></label>
+        <input asp-for="ManufacturingDate" class="form-control" type="date"
+            max="@DateTime.Now.ToString("yyyy-MM-dd")" />
+        <span asp-validation-for="ManufacturingDate" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Price" class="form-label"></label>
+        <input asp-for="Price" class="form-control" inputmode="decimal" pattern="[0-9.,]+"
+            placeholder="Nhập giá, ví dụ: 1.200.000,00" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+        <small class="form-text text-muted">Nhập số dạng 1.200.000,00</small>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="DecriptionPro" class="form-label"></label>
+        <textarea asp-for="DecriptionPro" class="form-control" rows="3"
+            placeholder="Mô tả sản phẩm (tối đa 500 ký tự)"></textarea>
+        <span asp-validation-for="DecriptionPro" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success me-2">Lưu</button>
+    <a asp-action="Details" class="btn btn-secondary">Hủy</a>
+</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
